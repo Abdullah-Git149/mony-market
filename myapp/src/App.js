@@ -18,6 +18,7 @@ import AOS from "aos"
 import 'animate.css';
 
 
+
 function App() {
   // AOS.init({
   //   offset: 820,

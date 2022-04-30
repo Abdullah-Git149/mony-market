@@ -1,11 +1,12 @@
-.posts{
-    display:  flex;
+.posts {
+    display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    
-/* background-color: aqua; */
+
+    /* background-color: aqua; */
 }
-.posts_child{
+
+.posts_child {
     /* border: 2px solid white; */
     padding: 20px;
     display: flex;
@@ -13,67 +14,85 @@
     justify-content: space-around;
     margin: 20px 10px;
     transition: 0.5s ease;
-    
+
 }
-.posts_child:hover{
+
+.posts_child:hover {
     box-shadow: 2px 8px 22px -2px #62F2C6;
 
 
 }
-.posts a{
+
+.posts a {
     text-decoration: none;
 }
-.myicons{
+
+.myicons {
     padding: 5px 8px;
     font-size: 20px;
     margin: 10px 0;
     transition: 0.4s ease;
 }
-.posts .posts_child:hover .myicons{
+
+.posts .posts_child:hover .myicons {
     color: white;
 }
-.addional{
+
+.addional {
     display: flex;
     flex-direction: column;
 }
-.homerow{
+
+.homerow {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
 }
-.Home__inner{
-    margin: 5px 0;
+
+.Home__inner {
+    margin: 5px 5px;
     border: 1px solid #62F2C6;
     border-radius: 10px;
-    padding: 10px ;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    
+
 }
-.Home__inner:hover{
+
+.Home__inner:hover {
     margin: 5px 0;
     border: none;
     border-radius: 10px;
     background-color: #90fada;
     color: #030820;
     transition: 0.5s ease;
-    padding: 10px ;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    text-decoration: none;
+
 }
-.Home__inner span{
+
+.test {
+    width: 1100px;
+}
+
+
+.Home__inner span {
     font-weight: 400;
 
 }
-.uppercase{
+
+.uppercase {
     text-transform: capitalize;
 }
-.avatar{
+
+.avatar {
     padding: 5px;
     border-radius: 50%;
     display: inline;
@@ -87,21 +106,52 @@
     text-transform: capitalize;
     margin: 15px 0;
 }
-.Home__inner:hover .avatar{
-background-color: #030820;
+
+.Home__inner:hover .avatar {
+    background-color: #030820;
 }
-.pagination{
+
+.pagination {
     display: flex;
     margin: 10px 0;
 }
-.pagination li{
+
+.pagination li {
     list-style: none;
 
 }
-.pagination li a{
+
+.pagination li a {
     display: block;
     padding: 10px;
     border: 1px solid #62F2C6;
+    border-radius: 20%;
     text-decoration: none;
     margin: 0 5px;
+}
+
+.home_icons_parent {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.home_icons {
+    margin-top: 25px;
+
+    font-size: 15px;
+
+}
+
+.mr {
+    margin-right: 18px;
+}
+
+@media (max-width: 1030px) {
+
+    .test {
+        width: 100%;
+    }
+
 }

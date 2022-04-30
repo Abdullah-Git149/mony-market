@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { allPostsAction } from "../store/actions/postAction"
 import { useEffect } from "react";
 import moment from "moment";
+import { BsFillChatLeftTextFill } from "react-icons/bs"
+import { GiBangingGavel } from "react-icons/gi"
 import Pagination from "./Pagination";
 import AOS from "aos"
 import 'animate.css';
@@ -243,9 +245,9 @@ const Home = () => {
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="section_wrapper mcb-section-inner">
-                      <div  data-aos="fade-right" className="disspear"  >
-                        <div className="wrap mcb-wrap one valign-top clearfix"  >
+                    <div className="section_wrapper mcb-section-inner ">
+                      <div data-aos="fade-right" className="disspear "  >
+                        {/* <div className="wrap mcb-wrap one valign-top clearfix"  >
                           <div className="mcb-wrap-inner">
                             <div className="column mcb-column one-third column_column  column-margin-20px">
                               <div className="column_attr clearfix">
@@ -257,8 +259,8 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="wrap mcb-wrap one-third valign-top clearfix">
+                        </div> */}
+                        {/* <div className="wrap mcb-wrap one-third valign-top clearfix">
                           <div className="mcb-wrap-inner">
                             <div className="column mcb-column one column_column column-margin-20px">
                               <div className="column_attr clearfix">
@@ -292,15 +294,15 @@ const Home = () => {
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div
-                        className="wrap mcb-wrap two-third valign-top clearfix"
+                        className="wrap mcb-wrap two-third valign-top clearfix "
                         style={{ padding: "0 0 0 5%" }}
                       >
 
-                        <div className="mcb-wrap-inner" data-aos="fade-left">
-                          <div className="homerow">
+                        <div className="mcb-wrap-inner " data-aos="fade-left">
+                          <div className="homerow test ">
 
                             {!loading ? allPosts?.length > 0 ? allPosts?.map((post) => (
                               <div key={post._id} >
@@ -310,12 +312,16 @@ const Home = () => {
                                   <span>Amount: {post.amount}</span>
                                   <span>Currency: {post.post_currency}</span>
                                   <span>Published: {moment(post.updatedAt).format("MMM Do YY")}</span>
+                                  <div className="home_icons_parent">
+                                    <span  className="home_icons mr"><BsFillChatLeftTextFill /> Chat</span>
+                                    <span className="home_icons"><GiBangingGavel /> Bid</span>
+                                  </div>
                                 </Link>
                               </div>
 
                             )) : "No Post Available" : " ....."}
-                            <Pagination page={page} count={count} perPage={perPage} />
                           </div>
+                          <Pagination page={page} count={count} perPage={perPage} />
                         </div>
                       </div>
                       <div className="wrap mcb-wrap one valign-top clearfix">

@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { postDetailAction, buyAdAction } from "../store/actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
 import Homefooter from "../components/Homefooter";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
-
+import { Button, Modal, Form } from "react-bootstrap"
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import Modall from "../components/Modall";
 
 const Details = () => {
     let { id } = useParams()
@@ -13,7 +15,11 @@ const Details = () => {
     const { postDetail } = useSelector((state) => state.PostReducer)
     const { user } = useSelector((state) => state.AuthReducer);
     const { message } = useSelector((state) => state.PurchaseAD);
-   
+    const [show, setShow] = useState(false);
+    const [openModal, setOpenModal] = useState(false)
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     useEffect(() => {
         dispatch(postDetailAction(id))
     }, [id])
@@ -303,15 +309,23 @@ const Details = () => {
                                                                 <b> {moment(postDetail.updatedAt).format("MMM Do YY")}</b>
                                                             </span>
                                                         </div>
-                                                        <form action="POST" onSubmit={buyADFunction}>
-                                                            <div className="column one">
-                                                                <input
-                                                                    type="submit"
-                                                                    value="Buy Now"
-                                                                    id="submit"
-                                                                />
-                                                            </div>
-                                                        </form>
+                                                        {/* <PopUp /> */}
+                                                        {
+                                                            user ? <form action="POST" onSubmit={buyADFunction}>
+                                                                <div className="column one">
+                                                                    <input
+                                                                        type="submit"
+                                                                        value="Buy Now"
+                                                                        id="submit"
+                                                                        className="black"
+                                                                        onClick={() => setOpenModal(true)}
+                                                                    />
+                                                                    <button className="black">Chat with seller</button>
+                                                                </div>
+                                                            </form> : ""
+                                                        }
+
+                                                        <Modall openModal={openModal} onClose={() => setOpenModal(false)} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,43 +393,7 @@ const Details = () => {
                                         >
 
                                         </div>
-                                        {/* {posts.length > 0 ? posts.map((post) => {
-                      <>
-                        <div
-                          className="section mcb-section"
-                          style={{ paddingTop: "0px", paddingBottom: "40px" }}
-                        >
-                          <div className="section_wrapper mcb-section-inner">
-                            <div className="wrap mcb-wrap one valign-top clearfix">
-                              <div className="mcb-wrap-inner">
-                                <div className="column mcb-column one-third column_column">
-                                  <div
-                                    className="column_attr clearfix"
-                                    style={{
-                                      backgroundImage:
-                                        'url("assets/images/home_pay_features2.png")',
-                                      backgroundRepeat: "no-repeat",
-                                      backgroundPosition: "left top",
-                                      padding: "5px 0 0 60px",
-                                    }}
-                                  >
-                                    <h5>{post.user_fullname}</h5>
-                                    <p>
-                                      Lorem ipsum dolor sit amet, consectetur adi
-                                      piscing elit, sed do eiusmod tempor inci
-                                      didunt ut labore et dolore magna aliqua. Et
-                                      leo duis ut diam quam nulla porttitor.
-                                    </p>
-                                  </div>
-                                </div>
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    })
-                      : " You dont have any post"} */}
+
 
                                         <div
                                             className="section mcb-section"

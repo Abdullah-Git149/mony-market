@@ -147,7 +147,7 @@ const deletePost = async (req, res) => {
 const homePosts = async (req, res) => {
     try {
         const page = req.params.page
-        perPage = 4
+        perPage = 10
         const skip = (page - 1) * perPage
 
         const posts = await Post.find({}).skip(skip).limit(perPage).sort({ updatedAt: -1 })
