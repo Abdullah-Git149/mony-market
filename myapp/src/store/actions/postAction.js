@@ -148,9 +148,7 @@ export const buyAdAction = (formData) => {
         dispatch({ type: "SET_LOADER" })
         console.log("actionfrom", formData)
         await axios.post(`${process.env.REACT_APP_API_URL}purchaseAd`, formData).then((res) => {
-            const msg = res.data.msg
-            console.log(res)
-            console.log(msg)
+            const msg = res.data.msg      
             dispatch({ type: "PURCHASE_AD", payload: msg })
         }).catch((err) => {
             console.log(err);

@@ -1,10 +1,11 @@
-.profile__flex{
-    display: "flex";
-    align-items: "center";
-    justify-content: "space-between";
-    width: 40%;
-  }
-  /* Modal Button */
+.profile__flex {
+  display: "flex";
+  align-items: "center";
+  justify-content: "space-between";
+  width: 40%;
+}
+
+/* Modal Button */
 .modalButton {
   position: fixed;
   top: 40%;
@@ -58,19 +59,24 @@
   background-color: #0D1135;
 
 }
-.content input{
-   width: 100%;
+
+.content input {
+  width: 100%;
 }
-.content button{
+
+.content button {
   margin: 20px 0;
 }
- #birthdaytime{
-   padding: 10px 0;
- }
+
+#birthdaytime {
+  padding: 10px 0;
+}
+
 .btnContainer {
   display: flex;
   padding: 1rem 1rem;
 }
+
 .btnContainer button {
   width: 100%;
   margin: .5rem;
@@ -94,6 +100,51 @@
   font-weight: 600;
 }
 
+.modal__btn {
+  background-color: #337AB7 !important;
+}
+
+.black {
+  color: black !important
+}
+
+.cross_btn {
+  font-size: 20px;
+  color: #0D1135;
+  cursor: pointer;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
+  /* background-color: red; */
+}
+
+.converter__input {
+  padding-left: 5px;
+  font-size: 20px;
+  height: 36px;
+ 
+}
+
+.middle,
+.right {
+  width: 120px;
+}
+
+.containerr {
+  width: 50%;
+  background-color: #0D1135;
+  padding: 35px;
+  border-radius: 10px;
+  border-left: 5px solid #62F2C6;
+}
+.switch{
+  margin: 10px 0;
+}
+
 @media screen and (max-width: 500px) {
   .modalContainer {
     flex-direction: column;
@@ -103,35 +154,26 @@
     width: 100%;
     height: 100vh;
   }
-  
+
 
   .heading {
     margin: 1rem;
   }
 }
-.modal__btn{
-  background-color: #337AB7 !important;
-}
-.black{
-  color:black !important
-}
-.cross_btn{
-  font-size: 20px;
-  color: #0D1135;
-}
 
 @media (max-width: 360px) {
 
-    .disspear{
-      display: none !important;
-    }
-    .my__flex{
-        width: 100% !important; 
-        
-    }
-    .padding{
-        margin: 0 25px;
-    }
-  
+  .disspear {
+    display: none !important;
   }
-  
+
+  .my__flex {
+    width: 100% !important;
+
+  }
+
+  .padding {
+    margin: 0 25px;
+  }
+
+}

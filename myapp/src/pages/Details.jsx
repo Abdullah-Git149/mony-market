@@ -15,11 +15,8 @@ const Details = () => {
     const { postDetail } = useSelector((state) => state.PostReducer)
     const { user } = useSelector((state) => state.AuthReducer);
     const { message } = useSelector((state) => state.PurchaseAD);
-    const [show, setShow] = useState(false);
     const [openModal, setOpenModal] = useState(false)
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     useEffect(() => {
         dispatch(postDetailAction(id))
     }, [id])
@@ -43,11 +40,7 @@ const Details = () => {
 
     const buyADFunction = (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append("post_id", id)
-        formData.append("buyer_id", user._id)
-
-        console.log(formData);
+       
         dispatch(buyAdAction({
             postId: id,
             userId: user._id

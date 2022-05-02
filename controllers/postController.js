@@ -1,4 +1,4 @@
-const { Post, Purchase } = require("../models/Post")
+const { Post, Purchase, AD } = require("../models/Post")
 const formadible = require("formidable")
 const { body, validationResult } = require("express-validator")
 const { User } = require("../models/User")
@@ -33,6 +33,7 @@ const addPost = (req, res) => {
 
                 })
                 await post.save()
+
                 return res.status(201).json({ msg: "You post is created", post })
             }
         })
@@ -42,6 +43,30 @@ const addPost = (req, res) => {
     }
 }
 
+const createPost = async (req, res) => {
+    try {
+        if (!req.body.amount) {
+            res.status(400).json({ status: 0, msg: "Please add amount" })
+        } else if (!req.body.currency_from) {
+            res.status(400).json({ status: 0, msg: "Please select currency" })
+        } else if (!req.body.currency_from) {
+            res.status(400).json({ status: 0, msg: "Please select currency" })
+        } else {
+            const createAd = new AD({
+                amount: req.body.amount,
+                currency_from: req.body.currency_from,
+                currency_to: req.body.currency_to,
+                final_amount: req.body.final_amount,
+                userId: req.body.userId
+            })
+            const newAd = await createAd.save()
+            res.status(201).json({ status: 1, msg: "Successfully AD is created", newAd })
+        }
+    } catch (error) {
+        return res.status(404).json({ errors: error, msg: error.message })
+
+    }
+}
 const buyPost = (req, res) => {
     try {
         const form = formadible({ multiples: true })
@@ -198,7 +223,7 @@ const purchaseAd = async (req, res) => {
             await purchase.save()
 
             const count = await Purchase.find({}).where("post_id").equals(req.body.postId).countDocuments()
-            return res.status(201).json({msg:"Purchased AD", status: 1, purchase, count })
+            return res.status(201).json({ msg: "Purchased AD", status: 1, purchase, count })
         }
 
     } catch (error) {
@@ -206,4 +231,4 @@ const purchaseAd = async (req, res) => {
 
     }
 }
-module.exports = { purchaseAd, addPost, fetchPosts, fetchSinglePost, updatePost, getAllPosts, postValidator, deletePost, postDetails, homePosts }
+module.exports = { purchaseAd, addPost, fetchPosts, fetchSinglePost, updatePost, getAllPosts, postValidator, deletePost, postDetails, homePosts, createPost }

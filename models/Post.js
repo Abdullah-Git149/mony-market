@@ -46,7 +46,7 @@ const postSchema = mongoose.Schema(
             required: true,
             ref: 'User'
         },
-       
+
     },
     {
         timestamps: true,
@@ -54,22 +54,49 @@ const postSchema = mongoose.Schema(
 )
 
 const purchaseTable = mongoose.Schema({
-    status_Ad:{
-        type:String,
-        require:false,
+    status_Ad: {
+        type: String,
+        require: false,
     },
-    post_id:{
+    post_id: {
         type: mongoose.Schema.Types.ObjectId,
-        require:true,
-        ref:"Post"
+        require: true,
+        ref: "Post"
     },
-    buyer_id:{
+    buyer_id: {
         type: mongoose.Schema.Types.ObjectId,
-        require:true,
-        ref:"User"
+        require: true,
+        ref: "User"
     }
 })
+
+const adSchema = mongoose.Schema({
+    amount: {
+        type: Number,
+        require: false,
+        trim: true
+    },
+    currency_from: {
+        type: String,
+        require: false
+    },
+    currency_to: {
+        type: String,
+        require: false
+    },
+    final_amount: {
+        type: String,
+        require: false
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    }
+})
+
 const Post = mongoose.model("Post", postSchema)
 const Purchase = mongoose.model("Purchase", purchaseTable)
+const AD = mongoose.model("AD", adSchema)
 
-module.exports = {Post , Purchase}
+module.exports = { Post, Purchase, AD }

@@ -16,6 +16,7 @@ import Edit from "./pages/Edit";
 import Details from "./pages/Details";
 import AOS from "aos"
 import 'animate.css';
+import Test from "./pages/Test";
 
 
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/advertise" element={<Advertise />} />
             <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -5,12 +5,59 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { createPostAction, redirect } from "../store/actions/postAction"
+import Test from "./Test";
 
+
+import Axios from 'axios';
+import Dropdown from 'react-dropdown';
+import { HiSwitchHorizontal } from 'react-icons/hi';
+import 'react-dropdown/style.css';
 
 const Advertise = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
+
+
+  // Initializing all the state variables 
+  const [info, setInfo] = useState([]);
+  const [input, setInput] = useState(0);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("inr");
+  const [options, setOptions] = useState([]);
+  const [output, setOutput] = useState(0);
+
+  // Calling the api whenever the dependency changes
+  useEffect(() => {
+    Axios.get(
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
+      .then((res) => {
+        setInfo(res.data[from]);
+        console.log(res)
+      })
+  }, [from]);
+
+  // Calling the convert function whenever
+  // a user switches the currency
+  useEffect(() => {
+    setOptions(Object.keys(info));
+    convert();
+  }, [info])
+
+  // Function to convert the currency
+  function convert() {
+    var rate = info[to];
+    setOutput(input * rate);
+  }
+
+  // Function to switch between two currency
+  function flip() {
+    var temp = from;
+    setFrom(to);
+    setTo(temp);
+  }
+
+
 
   const { user } = useSelector((state) => state.AuthReducer);
   const { createErrors, redirect } = useSelector((state) => state.PostReducer);
@@ -400,7 +447,7 @@ const Advertise = () => {
                                   id="contactform"
                                   method="POST"
                                 >
-                                  <div className="column one">
+                                  {/* <div className="column one">
                                     <label htmlFor="amount">Select An Amount</label>
                                     <input
                                       id="amount"
@@ -422,11 +469,7 @@ const Advertise = () => {
                                       onChange={handleInputs}
                                       id="sclt1"
                                     >
-                                      {/* {
-                                        state.post_currency.map((data) => {
-                                          <option value={data.name} selected={data.name}>{data.name}</option>
-                                        })
-                                      } */}
+                                
 
                                       <option style={{ backgroundColor: "black" }} value="" disabled>-- Select Currency --</option>
                                       <option style={{ backgroundColor: "black" }} value="ruppee">ruppee</option>
@@ -466,6 +509,48 @@ const Advertise = () => {
                                       size={40}
                                       aria-invalid="false"
                                     />
+                                  </div> */}
+
+                                  <div className="column one">
+                                    {/* <Test /> */}
+                                    <div className="App" >
+                                      <div className="heading">
+                                        <h1>Post an AD </h1>
+                                      </div>
+                                      <div className="containerr">
+                                        <div className="left">
+                                          <h3>Amount</h3>
+                                          <input type="number"
+                                            placeholder="Enter the amount"
+                                            className="converter__input"
+                                            onChange={(e) => setInput(e.target.value)} />
+                                        </div>
+                                        <div className="middle">
+                                          <h3>From</h3>
+                                          <Dropdown options={options}
+                                          className="dropDown"
+                                            onChange={(e) => { setFrom(e.value) }}
+                                            value={from} placeholder="From" />
+                                        </div>
+                                        <div className="switch">
+                                          <HiSwitchHorizontal size="30px"
+                                            onClick={() => { flip() }} />
+                                        </div>
+                                        <div className="right">
+                                          <h3>To</h3>
+                                          <Dropdown options={options}
+                                            className="dropDown"
+                                            onChange={(e) => { setTo(e.value) }}
+                                            value={to} placeholder="To" />
+                                        </div>
+                                      </div>
+                                      <div className="result">
+                                        <button onClick={() => { convert() }} style={{ color: "black" , marginTop:"20px" }}>Convert</button>
+                                        <h2>Converted Amount:</h2>
+                                        <p>{input + " " + from + " = " + output.toFixed(2) + " " + to}</p>
+
+                                      </div>
+                                    </div>
                                   </div>
                                   {/* One Second (1/2) Column */}
 
@@ -474,49 +559,13 @@ const Advertise = () => {
                                       type="submit"
                                       defaultValue="Create Post"
                                       id="submit"
+                                      style={{ color: "black" }}
                                     />
                                   </div>
                                 </form>
                               </div>
                             </div>
-                            <div className="column mcb-column one-second column_column">
-                              <div
-                                className="column_attr clearfix disspear"
-                                style={{ padding: "0 7% 0 0" }}
-                              >
-                                <h2>
-                                  Do you need more options from{" "}
-                                  <span className="themecolor">Be Pay?</span>{" "}
-                                  Contact us
-                                </h2>
-                                <hr
-                                  className="no_line"
-                                  style={{ margin: "0 auto 10px" }}
-                                />
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore magna aliqua.
-                                  Et leo duis ut diam quam nulla porttitor. Eget
-                                  nunc scelerisque viverra mauris in.
-                                </p>
-                                <hr
-                                  className="no_line"
-                                  style={{ margin: "0 auto 10px" }}
-                                />
-                                <a
-                                  className="button  button_right button_size_2 button_js"
-                                  href="#"
-                                >
-                                  <span className="button_icon">
-                                    <i className="icon-right-circled" />
-                                  </span>
-                                  <span className="button_label">
-                                    Contact us
-                                  </span>
-                                </a>
-                              </div>
-                            </div>
+                            
                           </div>
                         </div>
                       </div>
